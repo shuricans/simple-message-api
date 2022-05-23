@@ -1,0 +1,72 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <changeSet author="shuricans (generated)" id="1653319387713-1">
+        <createSequence incrementBy="1" sequenceName="messages_message_id_seq" startValue="1"/>
+    </changeSet>
+    <changeSet author="shuricans (generated)" id="1653319387713-2">
+        <createSequence incrementBy="1" sequenceName="roles_role_id_seq" startValue="1"/>
+    </changeSet>
+    <changeSet author="shuricans (generated)" id="1653319387713-3">
+        <createSequence incrementBy="1" sequenceName="users_user_id_seq" startValue="1"/>
+    </changeSet>
+    <changeSet author="shuricans (generated)" id="1653319387713-4">
+        <createTable tableName="messages">
+            <column name="message_id" type="BIGINT" defaultValueSequenceNext="messages_message_id_seq">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="messagesPK"/>
+            </column>
+            <column name="created_time" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="text" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="shuricans (generated)" id="1653319387713-5">
+        <createTable tableName="roles">
+            <column name="role_id" type="BIGINT" defaultValueSequenceNext="roles_role_id_seq">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="rolesPK"/>
+            </column>
+            <column name="name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shuricans (generated)" id="1653319387713-6">
+        <createTable tableName="users">
+            <column name="user_id" type="BIGINT" defaultValueSequenceNext="users_user_id_seq">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="usersPK"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shuricans (generated)" id="1653319387713-7">
+        <createTable tableName="users_roles">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shuricans (generated)" id="1653319387713-8">
+        <addUniqueConstraint columnNames="name" constraintName="UC_ROLESNAME_COL" tableName="roles"/>
+    </changeSet>
+    <changeSet author="shuricans (generated)" id="1653319387713-9">
+        <addUniqueConstraint columnNames="username" constraintName="UC_USERSUSERNAME_COL" tableName="users"/>
+    </changeSet>
+    <changeSet author="shuricans (generated)" id="1653319387713-10">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="users_roles" constraintName="FK2o0jvgh89lemvvo17cbqvdxaa" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="shuricans (generated)" id="1653319387713-11">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="users_roles" constraintName="FKj6m8fwv7oqv74fcehir1a9ffy" deferrable="false" initiallyDeferred="false" referencedColumnNames="role_id" referencedTableName="roles" validate="true"/>
+    </changeSet>
+    <changeSet author="shuricans (generated)" id="1653319387713-12">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="messages" constraintName="FKpsmh6clh3csorw43eaodlqvkn" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

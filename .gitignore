@@ -33,3 +33,6 @@ build/
 .vscode/
 
 Junior Developer.txt
+database/derby.log
+db-data/
+docker-test/
