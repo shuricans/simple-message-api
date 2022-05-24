@@ -30,19 +30,16 @@ public class MessageResource {
     public ResponseEntity<?> fetchOrSaveMessagesByUsername(@RequestBody RequestMessageDto requestMessageDto) {
         String username = requestMessageDto.getUsername();
         String text = requestMessageDto.getText();
-        final int pageNumber = 0;
-        int size;
 
         if (text.matches("^history [1-9]\\d*$")) {
-            size = Integer.parseInt(text.substring(8));
+            int size = Integer.parseInt(text.substring(8));
             log.info("Fetching last {} messages for user: {}", size, username);
             Page<MessageDto> page = messageService
-                    .findMessagesByUsername(username, pageNumber, size, "id", Direction.DESC);
+                    .findMessagesByUsername(username, 0, size, "id", Direction.DESC);
             List<MessageDto> messages = page.getContent();
             return ResponseEntity.ok().body(messages);
         }
 
-        log.info("Saving message for user: {}", username);
         MessageDto messageDto = MessageDto.builder()
                 .text(text)
                 .createdTime(LocalDateTime.now())
@@ -50,6 +47,7 @@ public class MessageResource {
                 .build();
 
         MessageDto savedMessageDto = messageService.saveMessage(messageDto);
+        log.info("Message from user: {} saved successfully", username);
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/message").toUriString());
         return ResponseEntity.created(uri).body(savedMessageDto);
     }
