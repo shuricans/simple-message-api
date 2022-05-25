@@ -11,7 +11,7 @@
 * [H2](https://www.h2database.com/) - test
 * [Liquibase maven plugin](https://docs.liquibase.com/home.html) - version control for DB
 * Integration tests for custom repository methods and specifications  
-  see [test]() package
+  see [test](https://github.com/shuricans/simple-message-api/tree/master/database/src/test) package
 #### Message-service-api module
 > REST API for messages.  
 > Authentication & authorization with JWT
@@ -19,7 +19,7 @@
 * [gson](https://github.com/google/gson)
 * [java-jwt](https://github.com/auth0/java-jwt)
 * [H2](https://www.h2database.com/) - test
-
+* JUnit & Integration tests, see [test](https://github.com/shuricans/simple-message-api/tree/master/message-service-api/src/test) package
 #### Other common things:
 * [Spring Security](https://spring.io/projects/spring-security)
 * [Lombok](https://projectlombok.org/)
