@@ -1,4 +1,4 @@
-## Simple message api with JWT authorization
+## Simple message api. Security with JWT.
 ### Hi everyone!
 
 ### Project has two modules, short overview of the tools.
