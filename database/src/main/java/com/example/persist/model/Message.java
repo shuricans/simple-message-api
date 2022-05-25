@@ -46,11 +46,11 @@ public class Message {
 
         Message message = (Message) o;
 
-        return id.equals(message.id);
+        return id != null ? id.equals(message.id) : message.id == null;
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return id != null ? id.hashCode() : 0;
     }
 }
