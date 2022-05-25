@@ -7,5 +7,5 @@ import lombok.Data;
 @Data
 public class RequestMessageDto {
     private String username;
-    private String text;
+    private String message;
 }

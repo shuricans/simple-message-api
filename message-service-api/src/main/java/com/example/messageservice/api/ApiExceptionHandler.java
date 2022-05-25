@@ -1,6 +1,7 @@
 package com.example.messageservice.api;
 
 import com.example.messageservice.error.ApiErrorResponse;
+import com.example.messageservice.error.BadRequestException;
 import com.example.messageservice.error.BlankMessageException;
 import com.example.messageservice.error.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -29,5 +30,15 @@ public class ApiExceptionHandler {
                 .message(ex.getMessage())
                 .build();
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ApiErrorResponse> handleBadRequestException(
+            BadRequestException ex) {
+        ApiErrorResponse response = ApiErrorResponse.builder()
+                .error("error-0200")
+                .message(ex.getMessage())
+                .build();
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }

@@ -2,6 +2,7 @@ package com.example.messageservice.api;
 
 import com.example.messageservice.dto.MessageDto;
 import com.example.messageservice.dto.RequestMessageDto;
+import com.example.messageservice.error.BadRequestException;
 import com.example.messageservice.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,12 +29,20 @@ public class MessageResource {
     private final MessageService messageService;
 
     @PostMapping
-    public ResponseEntity<?> fetchOrSaveMessagesByUsername(@RequestBody RequestMessageDto requestMessageDto) {
-        String username = requestMessageDto.getUsername();
-        String text = requestMessageDto.getText();
+    public ResponseEntity<?> fetchOrSaveMessagesByUsername(@RequestBody Optional<RequestMessageDto> requestMessageDto) {
 
-        if (text.matches("^history [1-9]\\d*$")) {
-            int size = Integer.parseInt(text.substring(8));
+        if (requestMessageDto.isEmpty() ||
+            requestMessageDto.get().getUsername() == null ||
+            requestMessageDto.get().getMessage() == null) {
+            log.warn("Invalid request body.");
+            throw new BadRequestException("Bad request.");
+        }
+
+        String username = requestMessageDto.get().getUsername();
+        String message = requestMessageDto.get().getMessage();
+
+        if (message.matches("^history [1-9]\\d*$")) {
+            int size = Integer.parseInt(message.substring(8));
             log.info("Fetching last {} messages for user: {}", size, username);
             Page<MessageDto> page = messageService
                     .findMessagesByUsername(username, 0, size, "id", Direction.DESC);
@@ -41,7 +51,7 @@ public class MessageResource {
         }
 
         MessageDto messageDto = MessageDto.builder()
-                .text(text)
+                .text(message)
                 .createdTime(LocalDateTime.now())
                 .username(username)
                 .build();

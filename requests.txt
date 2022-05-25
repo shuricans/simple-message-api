@@ -1,0 +1,32 @@
+################################################################
+# Attempt authentication with [user/password] credentials
+
+curl -X 'POST' 'http://localhost:8085/api/v1/login' \
+  -H 'Content-Type: application/json' \
+  -d '{"username": "user", "password": "password"}'
+
+################################################################
+# After successful authentication, we got jwt token
+# Replace "access_token" in header with a real one
+# Trying to get the last 5 messages
+
+curl -X 'POST' 'http://localhost:8085/api/v1/message' \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer_access_token" \
+  -d '{"username": "user", "message": "history 5"}'
+
+################################################################
+# Trying save new message
+
+curl -X 'POST' 'http://localhost:8085/api/v1/message' \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer_access_token" \
+  -d '{"username": "user", "message": "New awesome message!"}'
+
+################################################################
+# Also for example. Trying to get the last 2 messages
+
+curl -X 'POST' 'http://localhost:8085/api/v1/message' \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer_access_token" \
+  -d '{"username": "user", "message": "history 2"}'
