@@ -49,7 +49,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
             throw new AuthenticationServiceException(errorMessage);
         }
         if (request.getHeader("Content-Type") != null &&
-                request.getHeader("Content-Type").equals(APPLICATION_JSON_VALUE)) {
+                request.getHeader("Content-Type").contains(APPLICATION_JSON_VALUE)) {
             log.info("Trying authenticate with {} content-type", APPLICATION_JSON_VALUE);
             LoginRequest loginRequest = this.getLoginRequest(request);
 
