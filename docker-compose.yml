@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: db
+    image: shuricans/jwt-example-db:latest
+    restart: unless-stopped
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_PASSWORD: 123
+      PGDATA: postgres
+    networks:
+      default:
+
+
+  backend-app:
+    container_name: message-service-api-app
+    image: shuricans/message-service-api-app:latest
+    restart: unless-stopped
+    ports:
+      - "8085:8080"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+    networks:
+      default:
+
+
+networks:
+  default:
+    external:
+      name: jwt-example

@@ -29,4 +29,17 @@
         <module>message-service-api</module>
     </modules>
 
+    <build>
+        <!-- Defines plugins that are used in the modules. -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.google.cloud.tools</groupId>
+                    <artifactId>jib-maven-plugin</artifactId>
+                    <version>3.2.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
 </project>
