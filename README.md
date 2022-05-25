@@ -1,6 +1,15 @@
 ## Simple message api. Security with JWT.
 ### Hi everyone!
 
+### Short description
+* Auth  endpoint `/api/v1/login/` takes a simple json like: `{"username":"user","password":"password"}`
+* If the credentials are validated, we will get a jwt-token. `{"access_token": "jwt-token"}`
+* Next we can use this endpoint `/api/v1/message/`, takes a simple json like: `{"username":"user","message":"text"}`
+* For all the following requests we attached `Authorization` header - `Bearer_jwt-token`
+* If we send, for example - `{"username":"user","message":"text"}` this message will be saved in database.
+* And we can send, for example - `{"username":"user","message":"history 5"}` this query fetch the last 5 messages for us.
+* Yep. Pretty simple.
+
 ### Project has two modules, short overview of the tools.
 
 #### Database module
