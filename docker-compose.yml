@@ -10,9 +10,6 @@ services:
     environment:
       POSTGRES_PASSWORD: 123
       PGDATA: postgres
-    networks:
-      default:
-
 
   backend-app:
     container_name: message-service-api-app
@@ -25,11 +22,3 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 5432
-    networks:
-      default:
-
-
-networks:
-  default:
-    external:
-      name: jwt-example
