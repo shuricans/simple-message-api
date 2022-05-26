@@ -39,8 +39,8 @@
 ##### 1. First way - docker compose:
 
 > * Images for x86 architecture, Linux.
-> * [database image](https://hub.docker.com/repository/docker/shuricans/jwt-example-db) already have example data, no need mappings volumes.
-> * [message-service-image](https://hub.docker.com/repository/docker/shuricans/message-service-api-app) will wait for the database service it depends on, this behavior implements with [entrypoint.sh](https://github.com/shuricans/simple-message-api/blob/master/message-service-api/src/main/jib/entrypoint.sh) & [wait-for-service.sh](https://github.com/shuricans/simple-message-api/blob/master/message-service-api/src/main/jib/wait-for-service.sh).
+> * [database image](https://hub.docker.com/r/shuricans/jwt-example-db) already have example data, no need mappings volumes.
+> * [message-service-image](https://hub.docker.com/r/shuricans/message-service-api-app) will wait for the database service it depends on, this behavior implements with [entrypoint.sh](https://github.com/shuricans/simple-message-api/blob/master/message-service-api/src/main/jib/entrypoint.sh) & [wait-for-service.sh](https://github.com/shuricans/simple-message-api/blob/master/message-service-api/src/main/jib/wait-for-service.sh).
 * Be sure you have [docker](https://docs.docker.com/engine/install/) installed.
 * Grab [docker-compose.yml](https://github.com/shuricans/simple-message-api/blob/master/docker-compose.yml) from root directory of this repository.
 * The default mapping port is 8085, you can change it in `docker-compose.yml` file.
@@ -51,7 +51,7 @@
 * See stats via `docker stats`
 
 ##### 2. Second way - docker & IntelliJ IDEA:
-> For database recommend using [database image](https://hub.docker.com/repository/docker/shuricans/jwt-example-db)  
+> For database recommend using [database image](https://hub.docker.com/r/shuricans/jwt-example-db)  
 > run it with that [docker-compose.yml](https://gist.github.com/shuricans/e3006989f8e5cd1fe9e14df527f156c3)  
 > required version - JDK 11
 * Clone project from github
